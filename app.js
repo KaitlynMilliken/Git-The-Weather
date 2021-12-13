@@ -9,6 +9,8 @@ var getData = function(city){
         let iconLink = "http://openweathermap.org/img/wn/" + weather.weather[0].icon + ".png";
         var d = new Date();
         var date = d.getDate() + "/" + (d.getMonth()+1) +  "/" +  d.getFullYear();
+        
+        
         var citySearch = document.createElement("button");
         citySearch.innerText = weather.name;
         citySearch.classList.add("btn", "btn-secondary", "previousCity");
@@ -53,6 +55,7 @@ var generateFiveDayForecast = function(data){
             let wind = document.createElement("span");
             let humidity = document.createElement("span");
             let container = document.createElement("div");
+            let icon = document.createElement("img");
 
             container.classList.add("day", "col", "day" + i);
 
@@ -63,12 +66,15 @@ var generateFiveDayForecast = function(data){
             temp.innerText = "Temp: " + fiveDay.daily[i].temp.day;
             wind.innerText = "Wind: " + fiveDay.daily[i].wind_speed + " MPH";
             humidity.innerText = "Humidity: " + fiveDay.daily[i].humidity;
+            icon.src = "";
+
             showDate.innerText = date;
 
            $(".day" + i).append(showDate);
            $(".day" + i).append(temp);
            $(".day" + i).append(wind);
            $(".day" + i).append(humidity);
+           $(".day" + i).append(icon);
 
            dateAdd = dateAdd + 1;
         }
@@ -85,8 +91,6 @@ $(".submit").on('click', function(){
     let userData = $("#userCity").val();
     if(userData){
         getData(userData);
-    } else{
-        console.log("Please enter city");
     }
 });
 
